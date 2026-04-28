@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>SkyMath | Aritmatika dengan Foto Pribadi</title>
+  <title>SkyMath | Belajar Aritmatika</title>
   <style>
     * {
       margin: 0;
@@ -23,8 +23,8 @@
       position: relative;
     }
 
-    /* Dekorasi langit */
-    .sky-aura {
+    /* Dekorasi langit minimal */
+    .sky-deco {
       position: fixed;
       width: 100%;
       height: 100%;
@@ -33,541 +33,507 @@
       pointer-events: none;
       z-index: 0;
     }
-    .sky-aura::before {
+    .sky-deco::before {
       content: "";
       position: absolute;
-      top: 12%;
-      left: -4%;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(255,250,235,0.2) 0%, rgba(255,250,235,0) 70%);
+      top: 15%;
+      left: -3%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255,250,240,0.15) 0%, rgba(255,250,240,0) 70%);
       border-radius: 50%;
     }
-    .sky-aura::after {
+    .sky-deco::after {
       content: "";
       position: absolute;
-      bottom: 8%;
+      bottom: 10%;
       right: -3%;
-      width: 340px;
-      height: 340px;
-      background: radial-gradient(circle, rgba(255,248,225,0.15) 0%, rgba(255,248,225,0) 70%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,245,235,0.12) 0%, rgba(255,245,235,0) 70%);
       border-radius: 50%;
     }
 
-    /* ========== FOTO DI POJOK KIRI ATAS (Matahari diganti foto) ========== */
+    /* Foto profil pojok kiri atas */
     .profile-photo {
       position: fixed;
       top: 20px;
       left: 20px;
       z-index: 20;
-      width: 70px;
-      height: 70px;
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      border: 3px solid rgba(255, 255, 255, 0.8);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      background: #f0f8ff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      transition: transform 0.25s ease;
+      background: #eef2f5;
     }
     .profile-photo:hover {
-      transform: scale(1.08);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      transform: scale(1.05);
     }
 
-    /* Pojok kanan atas: Awan dekorasi */
-    .corner-cloud {
+    /* Ikon awan sederhana di pojok kanan atas */
+    .simple-cloud {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 22px;
+      right: 22px;
       z-index: 20;
-      width: 70px;
-      height: auto;
+      font-size: 2.2rem;
+      opacity: 0.6;
       pointer-events: none;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-      opacity: 0.85;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
 
-    /* Responsive untuk gambar pojok */
-    @media (max-width: 680px) {
-      .profile-photo { width: 55px; height: 55px; top: 12px; left: 12px; }
-      .corner-cloud { width: 50px; top: 12px; right: 12px; }
+    @media (max-width: 600px) {
+      .profile-photo { width: 50px; height: 50px; top: 12px; left: 12px; }
+      .simple-cloud { font-size: 1.8rem; top: 14px; right: 14px; }
     }
 
+    /* Container utama */
     .game-container {
       position: relative;
       z-index: 10;
-      max-width: 800px;
+      max-width: 780px;
       width: 100%;
       background: rgba(255, 255, 250, 0.3);
-      backdrop-filter: blur(18px);
-      border-radius: 64px;
-      padding: 40px 44px 48px;
-      box-shadow: 0 32px 56px -20px rgba(0, 28, 48, 0.4), inset 0 1px 2px rgba(255,255,245,0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 56px;
+      padding: 36px 40px 44px;
+      box-shadow: 0 28px 48px -20px rgba(0, 28, 48, 0.35);
       border: 1px solid rgba(255,255,245,0.5);
-      transition: transform 0.2s ease;
     }
 
+    /* Header */
     .game-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,250,225,0.6);
+      margin-bottom: 30px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,250,225,0.5);
     }
     .brand {
       display: flex;
       align-items: baseline;
-      gap: 10px;
+      gap: 6px;
     }
     .brand-icon {
-      font-size: 1.7rem;
-      font-weight: 400;
-      opacity: 0.85;
+      font-size: 1.5rem;
+      opacity: 0.8;
     }
     .brand-title {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.3px;
       background: linear-gradient(115deg, #0a405e, #1f6e94);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
     }
-    .score-card {
+    .score-panel {
       background: #0f4664cc;
-      backdrop-filter: blur(4px);
-      padding: 8px 24px;
-      border-radius: 48px;
+      padding: 6px 20px;
+      border-radius: 40px;
       font-weight: 600;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: #f3fbff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
-    .score-card span {
+    .score-panel span {
       font-weight: 700;
-      font-size: 1.55rem;
-      margin-right: 6px;
+      font-size: 1.5rem;
+      margin-right: 4px;
     }
 
+    /* Statistik baris */
     .stats-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 32px;
-      background: rgba(245, 250, 255, 0.5);
-      backdrop-filter: blur(4px);
-      border-radius: 48px;
-      padding: 12px 28px;
+      gap: 20px;
+      margin-bottom: 28px;
+      background: rgba(245, 250, 255, 0.45);
+      border-radius: 44px;
+      padding: 10px 24px;
     }
-    .stat-item {
+    .stat-card {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 0.95rem;
+      gap: 10px;
+      font-size: 0.9rem;
       font-weight: 500;
       color: #154f6b;
     }
-    .stat-value {
-      font-size: 1.4rem;
+    .stat-number {
+      font-size: 1.35rem;
       font-weight: 700;
       color: #0a3a53;
       background: rgba(255,255,245,0.7);
-      padding: 4px 14px;
-      border-radius: 40px;
-      min-width: 70px;
+      padding: 3px 12px;
+      border-radius: 32px;
+      min-width: 65px;
       text-align: center;
     }
 
-    .lives-area {
+    /* Nyawa bentuk hati sederhana */
+    .lives-bar {
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 28px;
-      padding: 8px 12px;
-      background: rgba(255,250,235,0.4);
-      border-radius: 60px;
-      min-height: 55px;
+      padding: 6px 10px;
+      background: rgba(255,250,235,0.35);
+      border-radius: 50px;
     }
-    .heart {
-      font-size: 1.6rem;
-      transition: all 0.2s ease;
-      display: inline-block;
+    .heart-icon {
+      font-size: 1.5rem;
+      transition: all 0.2s;
     }
     .heart-beat {
-      animation: heartPulse 0.3s ease-in-out;
+      animation: softPulse 0.3s ease;
     }
-    @keyframes heartPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.25); color: #ff4757; }
-      100% { transform: scale(1); }
+    @keyframes softPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); color: #e74c3c; }
     }
 
-    .question-panel {
-      background: rgba(255, 255, 250, 0.94);
-      border-radius: 56px;
-      padding: 38px 20px;
+    /* Area soal */
+    .quiz-card {
+      background: rgba(255, 255, 250, 0.92);
+      border-radius: 52px;
+      padding: 34px 16px;
       text-align: center;
-      margin: 16px 0 28px;
-      box-shadow: 0 18px 32px -18px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s ease;
+      margin: 12px 0 24px;
+      box-shadow: 0 16px 28px -14px rgba(0, 0, 0, 0.15);
     }
-    .math-display {
-      font-size: 3.8rem;
+    .math-question {
+      font-size: 3.5rem;
       font-weight: 700;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-family: 'JetBrains Mono', monospace;
       color: #145c7e;
-      letter-spacing: 4px;
-      background: #eef5fc70;
+      letter-spacing: 3px;
+      background: #eef5fc60;
       display: inline-block;
-      padding: 16px 36px;
-      border-radius: 80px;
+      padding: 12px 28px;
+      border-radius: 70px;
     }
 
-    .options-grid {
+    /* Opsi jawaban */
+    .options-panel {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 28px;
-      margin: 28px 0 32px;
+      gap: 24px;
+      margin: 24px 0 28px;
     }
-    .math-option {
+    .opt-btn {
       background: #fefcf7;
       border: none;
-      width: 115px;
-      padding: 18px 0;
+      width: 110px;
+      padding: 16px 0;
       font-size: 1.8rem;
       font-weight: 600;
       font-family: monospace;
-      border-radius: 60px;
+      border-radius: 56px;
       color: #136589;
       cursor: pointer;
-      box-shadow: 0 8px 0 #9eb7c4;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      text-align: center;
+      box-shadow: 0 7px 0 #9eb7c4;
+      transition: all 0.08s linear;
     }
-    .math-option:active {
+    .opt-btn:active {
       transform: translateY(4px);
       box-shadow: 0 3px 0 #7f9aab;
     }
 
-    /* Efek benar - hijau */
-    .math-option.correct-highlight {
+    /* Efek jawaban */
+    .opt-btn.correct-glow {
       background: #2ecc71 !important;
       color: white !important;
       box-shadow: 0 4px 0 #27ae60 !important;
       transform: translateY(4px);
     }
-
-    /* Efek salah - abu-abu dengan opacity turun perlahan */
-    .math-option.wrong-fade {
+    .opt-btn.wrong-dim {
       background: #95a5a6 !important;
-      color: #555 !important;
+      color: #4a4a4a !important;
       box-shadow: 0 4px 0 #7f8c8d !important;
       transform: translateY(4px);
-      opacity: 0.5;
-      transition: all 0.4s ease-out;
+      opacity: 0.55;
+      transition: opacity 0.35s ease;
     }
-
-    /* Disable semua tombol setelah menjawab */
-    .math-option.disabled-opt {
-      cursor: default;
+    .opt-btn.disabled-btn {
       pointer-events: none;
+      cursor: default;
     }
 
-    .feedback-section {
-      background: rgba(245, 250, 255, 0.85);
-      border-radius: 48px;
-      padding: 18px 26px;
-      margin: 20px 0 32px;
+    /* Feedback area */
+    .feedback-box {
+      background: rgba(245, 250, 255, 0.8);
+      border-radius: 40px;
+      padding: 14px 22px;
+      margin: 16px 0 28px;
       text-align: center;
       font-weight: 500;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #1a5475;
-      transition: all 0.2s;
     }
 
-    .action-group {
+    /* Tombol aksi */
+    .actions {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       justify-content: center;
-      margin-top: 16px;
+      margin-top: 12px;
     }
-    .btn-next {
+    .btn-primary {
       background: linear-gradient(100deg, #3282a7, #1a678f);
       border: none;
       flex: 2;
-      padding: 15px 0;
-      font-size: 1.15rem;
+      padding: 13px 0;
+      font-size: 1.05rem;
       font-weight: 600;
-      border-radius: 54px;
+      border-radius: 48px;
       color: white;
       cursor: pointer;
-      box-shadow: 0 6px 0 #0a405a;
+      box-shadow: 0 5px 0 #0a405a;
       transition: 0.08s linear;
     }
-    .btn-reset {
-      background: rgba(45, 85, 110, 0.8);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,250,225,0.6);
+    .btn-secondary {
+      background: rgba(45, 85, 110, 0.75);
+      border: 1px solid rgba(255,250,225,0.5);
       flex: 1;
-      padding: 15px 0;
-      font-size: 1rem;
-      border-radius: 54px;
+      padding: 13px 0;
+      font-size: 0.95rem;
+      border-radius: 48px;
       font-weight: 500;
       color: #f1f9ff;
       cursor: pointer;
-      transition: all 0.18s ease;
     }
-    .btn-next:active { transform: translateY(3px); box-shadow: 0 2px 0 #0a405a; }
-    .btn-reset:active { transform: scale(0.96); background: #265d7a; }
+    .btn-primary:active { transform: translateY(3px); box-shadow: 0 2px 0 #0a405a; }
+    .btn-secondary:active { transform: scale(0.97); background: #1e5a78; }
 
-    .modal-overlay {
+    /* Modal sertifikat */
+    .modal-window {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(8px);
-      z-index: 100;
+      z-index: 200;
       display: flex;
       justify-content: center;
       align-items: center;
       visibility: hidden;
       opacity: 0;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
-    .modal-overlay.show {
+    .modal-window.active {
       visibility: visible;
       opacity: 1;
     }
-    .certificate-card {
-      background: linear-gradient(135deg, #ffffff, #f0f8ff);
+    .certificate {
+      background: white;
       border-radius: 48px;
-      padding: 48px 40px;
-      max-width: 500px;
-      width: 90%;
+      padding: 36px 32px;
+      max-width: 460px;
+      width: 88%;
       text-align: center;
-      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
-      border: 2px solid rgba(50,130,167,0.5);
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+      border-top: 6px solid #3282a7;
     }
-    .modal-overlay.show .certificate-card { transform: scale(1); }
-    .certificate-icon { font-size: 4rem; margin-bottom: 16px; }
-    .certificate-title { font-size: 2rem; font-weight: 700; color: #0a405e; margin-bottom: 12px; }
-    .certificate-subtitle { font-size: 1rem; color: #4a7c9c; margin-bottom: 24px; border-bottom: 2px dashed #9ac9ef; display: inline-block; padding-bottom: 8px; }
-    .score-summary { background: #e8f4fd; border-radius: 32px; padding: 20px; margin: 20px 0; }
-    .score-summary p { font-size: 1.2rem; margin: 8px 0; color: #1a5475; }
-    .score-summary .big-score { font-size: 2.5rem; font-weight: 800; color: #f5a623; }
-    .message-motivation { font-size: 1rem; font-style: italic; margin: 16px 0; color: #2c6e8f; }
-    .btn-close-modal { background: linear-gradient(100deg, #3282a7, #1a678f); border: none; padding: 12px 32px; font-size: 1rem; font-weight: 600; border-radius: 40px; color: white; cursor: pointer; margin-top: 16px; transition: 0.2s; }
-    .btn-close-modal:active { transform: scale(0.96); }
+    .certificate h2 {
+      font-size: 1.7rem;
+      color: #0a405e;
+      margin-bottom: 8px;
+    }
+    .certificate .sub {
+      color: #5a8aa8;
+      font-size: 0.85rem;
+      border-bottom: 1px dashed #bcd8ec;
+      display: inline-block;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+    }
+    .score-breakdown {
+      background: #ecf5fa;
+      border-radius: 28px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+    .score-breakdown p {
+      margin: 8px 0;
+      font-size: 1rem;
+      color: #1f5e7e;
+    }
+    .final-grade {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f39c12;
+    }
+    .motivation-text {
+      font-weight: 600;
+      margin: 18px 0;
+      padding: 12px;
+      border-radius: 32px;
+    }
+    .motivation-text.good {
+      background: #dff0e3;
+      color: #2c6b2f;
+    }
+    .motivation-text.bad {
+      background: #fee2e2;
+      color: #b33;
+    }
+    .restart-modal-btn {
+      background: #3282a7;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      margin-top: 12px;
+    }
 
-    @keyframes fadePop { 0% { transform: scale(0.97); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
-    .panel-pop { animation: fadePop 0.22s ease-out; }
-    @keyframes gentleShake { 0% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } 100% { transform: translateX(0); } }
-    .shake-grid { animation: gentleShake 0.2s ease-in-out 0s 2; }
-    .btn-disabled { opacity: 0.55; pointer-events: none; }
-
-    @media (max-width: 680px) {
-      .game-container { padding: 28px 20px 36px; }
-      .math-option { width: 80px; font-size: 1.4rem; padding: 12px 0; }
-      .math-display { font-size: 2.2rem; letter-spacing: 2px; padding: 12px 18px; }
-      .stats-row { flex-direction: column; align-items: stretch; gap: 12px; }
-      .stat-item { justify-content: space-between; }
-      .action-group { gap: 16px; }
-      .brand-title { font-size: 1.4rem; }
-      .heart { font-size: 1.3rem; }
-      .lives-area { gap: 8px; }
+    @media (max-width: 600px) {
+      .game-container { padding: 26px 20px 32px; }
+      .opt-btn { width: 80px; font-size: 1.4rem; padding: 11px 0; }
+      .math-question { font-size: 2rem; padding: 8px 18px; }
+      .stats-row { flex-wrap: wrap; justify-content: center; gap: 12px; }
     }
   </style>
 </head>
 <body>
-<div class="sky-aura"></div>
 
-<!-- ========== FOTO DI POJOK KIRI ATAS (GANTI MATAHARI) ========== -->
-<!-- Ganti src="foto-saya.jpg" dengan link foto Anda -->
-<img class="profile-photo" id="profilePhoto" src="foto-saya.jpg"alt="Foto Profil">
+<div class="sky-deco"></div>
 
-<!-- Pojok kanan atas: Awan dekorasi (tetap ada) -->
-<div class="corner-cloud">
-  <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15 45 C10 45 8 40 12 37 C8 32 14 27 20 30 C22 23 32 22 36 28 C40 24 50 26 50 34 C56 34 58 40 54 45 H15Z" fill="white" stroke="#B0D4E8" stroke-width="1.5" opacity="0.9"/>
-    <text x="35" y="43" text-anchor="middle" font-size="12" fill="#7AB3C8" font-weight="bold">☁</text>
-  </svg>
-</div>
+<!-- Foto profil (ganti dengan foto lokal anda) -->
+<img class="profile-photo" id="profilePhoto" src="foto-saya.jpg" alt="foto">
 
-<div class="game-container" id="gameContainer">
+<!-- Ikon awan sederhana (tidak berlebihan) -->
+<div class="simple-cloud">☁︎</div>
+
+<div class="game-container">
   <div class="game-header">
-    <div class="brand"><span class="brand-icon">☁</span><h1 class="brand-title">SkyMath</h1></div>
-    <div class="score-card"><span>★</span> <span id="scoreDisplay">0</span></div>
+    <div class="brand">
+      <span class="brand-icon">☁︎</span>
+      <span class="brand-title">SkyMath</span>
+    </div>
+    <div class="score-panel">
+      <span>★</span> <span id="scoreValue">0</span>
+    </div>
   </div>
 
   <div class="stats-row">
-    <div class="stat-item"><span class="stat-label">✓ Benar</span><span class="stat-value" id="correctCount">0</span></div>
-    <div class="stat-item"><span class="stat-label">Soal ke-</span><span class="stat-value" id="questionCounter">1</span></div>
-    <div class="stat-item"><span class="stat-label">★ Rata-rata</span><span class="stat-value" id="avgScore">0</span></div>
+    <div class="stat-card"><span class="stat-number" id="correctCount">0</span> <span>✔ benar</span></div>
+    <div class="stat-card"><span class="stat-number" id="questionCounter">1</span> <span>soal ke-</span></div>
+    <div class="stat-card"><span class="stat-number" id="avgScore">0</span> <span>★ rata-rata</span></div>
   </div>
 
-  <div class="lives-area" id="livesContainer"></div>
+  <div class="lives-bar" id="livesContainer"></div>
 
-  <div class="question-panel" id="questionPanel">
-    <div class="math-display" id="mathQuestion">45 + 28</div>
+  <div class="quiz-card" id="quizCard">
+    <div class="math-question" id="questionText">38 + 27</div>
   </div>
 
-  <div class="options-grid" id="optionsGrid"></div>
+  <div class="options-panel" id="optionsArea"></div>
 
-  <div class="feedback-section" id="feedbackMsg">Pilih jawaban yang tepat untuk melanjutkan</div>
+  <div class="feedback-box" id="feedbackMsg">Pilih jawaban yang tepat</div>
 
-  <div class="action-group">
-    <button class="btn-next" id="nextButton">Soal Berikutnya</button>
-    <button class="btn-reset" id="resetButton">Mulai Ulang</button>
+  <div class="actions">
+    <button class="btn-primary" id="nextBtn">Soal berikutnya</button>
+    <button class="btn-secondary" id="resetBtn">Mulai ulang</button>
   </div>
 </div>
 
-<div class="modal-overlay" id="resultModal">
-  <div class="certificate-card">
-    <div class="certificate-icon">🏆✨</div>
-    <div class="certificate-title">Sertifikat Kelulusan</div>
-    <div class="certificate-subtitle">SkyMath - Aritmatika Dasar</div>
-    <div class="score-summary">
-      <p>Total Soal: <strong>30</strong></p>
-      <p>Jawaban Benar: <strong id="finalCorrect">0</strong></p>
-      <p>Total Skor: <strong id="finalScore">0</strong></p>
-      <p>⭐ Rata-rata: <strong id="finalAvg">0</strong> ⭐</p>
-      <div class="big-score" id="gradeEmoji">🏅</div>
+<!-- Modal Sertifikat -->
+<div class="modal-window" id="certModal">
+  <div class="certificate">
+    <h2 id="certTitle">Sertifikat Kelulusan</h2>
+    <div class="sub" id="certSub">SkyMath — Aritmatika</div>
+    <div class="score-breakdown">
+      <p>✅ Benar : <strong id="finalCorrect">0</strong> / 30</p>
+      <p>⭐ Skor : <strong id="finalTotalScore">0</strong> / 300</p>
+      <p>📊 Nilai : <strong id="finalPercent">0</strong> %</p>
+      <div class="final-grade" id="gradeIcon">🏅</div>
     </div>
-    <div class="message-motivation" id="motivationMsg">Selamat! Kamu hebat dalam berhitung!</div>
-    <button class="btn-close-modal" id="closeModalBtn">Main Lagi</button>
+    <div class="motivation-text" id="motivationMsg">Selamat! Kerja bagus.</div>
+    <button class="restart-modal-btn" id="modalRestartBtn">⟳ Mulai ulang permainan</button>
   </div>
 </div>
 
 <script>
   (function() {
-    // ========== 30 SOAL ARITMATIKA ==========
-    const bankSoal = [
-      { question: "38 + 27", options: ["63", "65", "67", "69"], correct: "65" },
-      { question: "56 + 39", options: ["93", "95", "97", "99"], correct: "95" },
-      { question: "124 + 88", options: ["210", "212", "214", "216"], correct: "212" },
-      { question: "275 + 149", options: ["414", "424", "434", "444"], correct: "424" },
-      { question: "67 + 58", options: ["123", "125", "127", "129"], correct: "125" },
-      { question: "92 - 47", options: ["43", "45", "47", "49"], correct: "45" },
-      { question: "156 - 89", options: ["65", "67", "69", "71"], correct: "67" },
-      { question: "234 - 118", options: ["114", "116", "118", "120"], correct: "116" },
-      { question: "500 - 267", options: ["231", "233", "235", "237"], correct: "233" },
-      { question: "81 - 34", options: ["45", "46", "47", "48"], correct: "47" },
-      { question: "17 × 6", options: ["100", "102", "104", "106"], correct: "102" },
-      { question: "23 × 8", options: ["174", "184", "194", "204"], correct: "184" },
-      { question: "15 × 14", options: ["200", "210", "220", "230"], correct: "210" },
-      { question: "32 × 7", options: ["214", "224", "234", "244"], correct: "224" },
-      { question: "19 × 12", options: ["218", "228", "238", "248"], correct: "228" },
-      { question: "45 × 6", options: ["260", "270", "280", "290"], correct: "270" },
-      { question: "28 × 9", options: ["242", "252", "262", "272"], correct: "252" },
-      { question: "144 ÷ 12", options: ["10", "11", "12", "13"], correct: "12" },
-      { question: "225 ÷ 15", options: ["13", "14", "15", "16"], correct: "15" },
-      { question: "360 ÷ 18", options: ["18", "19", "20", "21"], correct: "20" },
-      { question: "500 ÷ 25", options: ["18", "19", "20", "21"], correct: "20" },
-      { question: "392 ÷ 14", options: ["26", "27", "28", "29"], correct: "28" },
-      { question: "726 ÷ 11", options: ["64", "65", "66", "67"], correct: "66" },
-      { question: "48 + 37", options: ["83", "85", "87", "89"], correct: "85" },
-      { question: "92 - 28", options: ["62", "64", "66", "68"], correct: "64" },
-      { question: "36 × 5", options: ["170", "180", "190", "200"], correct: "180" },
-      { question: "256 ÷ 16", options: ["14", "15", "16", "17"], correct: "16" },
-      { question: "74 + 53", options: ["125", "127", "129", "131"], correct: "127" },
-      { question: "150 - 78", options: ["70", "72", "74", "76"], correct: "72" },
-      { question: "25 × 8", options: ["190", "200", "210", "220"], correct: "200" }
+    // 30 soal aritmatika
+    const soalBank = [
+      { soal: "38 + 27", opt: ["63","65","67","69"], benar: "65" },
+      { soal: "56 + 39", opt: ["93","95","97","99"], benar: "95" },
+      { soal: "124 + 88", opt: ["210","212","214","216"], benar: "212" },
+      { soal: "275 + 149", opt: ["414","424","434","444"], benar: "424" },
+      { soal: "67 + 58", opt: ["123","125","127","129"], benar: "125" },
+      { soal: "92 - 47", opt: ["43","45","47","49"], benar: "45" },
+      { soal: "156 - 89", opt: ["65","67","69","71"], benar: "67" },
+      { soal: "234 - 118", opt: ["114","116","118","120"], benar: "116" },
+      { soal: "500 - 267", opt: ["231","233","235","237"], benar: "233" },
+      { soal: "81 - 34", opt: ["45","46","47","48"], benar: "47" },
+      { soal: "17 × 6", opt: ["100","102","104","106"], benar: "102" },
+      { soal: "23 × 8", opt: ["174","184","194","204"], benar: "184" },
+      { soal: "15 × 14", opt: ["200","210","220","230"], benar: "210" },
+      { soal: "32 × 7", opt: ["214","224","234","244"], benar: "224" },
+      { soal: "19 × 12", opt: ["218","228","238","248"], benar: "228" },
+      { soal: "45 × 6", opt: ["260","270","280","290"], benar: "270" },
+      { soal: "28 × 9", opt: ["242","252","262","272"], benar: "252" },
+      { soal: "144 ÷ 12", opt: ["10","11","12","13"], benar: "12" },
+      { soal: "225 ÷ 15", opt: ["13","14","15","16"], benar: "15" },
+      { soal: "360 ÷ 18", opt: ["18","19","20","21"], benar: "20" },
+      { soal: "500 ÷ 25", opt: ["18","19","20","21"], benar: "20" },
+      { soal: "392 ÷ 14", opt: ["26","27","28","29"], benar: "28" },
+      { soal: "726 ÷ 11", opt: ["64","65","66","67"], benar: "66" },
+      { soal: "48 + 37", opt: ["83","85","87","89"], benar: "85" },
+      { soal: "92 - 28", opt: ["62","64","66","68"], benar: "64" },
+      { soal: "36 × 5", opt: ["170","180","190","200"], benar: "180" },
+      { soal: "256 ÷ 16", opt: ["14","15","16","17"], benar: "16" },
+      { soal: "74 + 53", opt: ["125","127","129","131"], benar: "127" },
+      { soal: "150 - 78", opt: ["70","72","74","76"], benar: "72" },
+      { soal: "25 × 8", opt: ["190","200","210","220"], benar: "200" }
     ];
 
-    // ========== SOUND EFFECTS ==========
-    function playSound(type) {
-      try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        switch(type) {
-          case 'correct':
-            oscillator.frequency.value = 880;
-            gainNode.gain.value = 0.3;
-            oscillator.type = 'sine';
-            oscillator.start();
-            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.5);
-            oscillator.stop(audioContext.currentTime + 0.5);
-            break;
-          case 'wrong':
-            oscillator.frequency.value = 440;
-            gainNode.gain.value = 0.3;
-            oscillator.type = 'sawtooth';
-            oscillator.start();
-            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.4);
-            oscillator.stop(audioContext.currentTime + 0.4);
-            break;
-          case 'gameover':
-            for(let i = 0; i < 3; i++) {
-              const osc = audioContext.createOscillator();
-              const gain = audioContext.createGain();
-              osc.connect(gain);
-              gain.connect(audioContext.destination);
-              osc.frequency.value = 300 - (i * 50);
-              gain.gain.value = 0.25;
-              osc.start();
-              gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.3);
-              osc.stop(audioContext.currentTime + 0.3);
-            }
-            break;
-          case 'win':
-            const osc1 = audioContext.createOscillator();
-            const gain1 = audioContext.createGain();
-            osc1.connect(gain1);
-            gain1.connect(audioContext.destination);
-            osc1.frequency.value = 1046.50;
-            gain1.gain.value = 0.3;
-            osc1.type = 'sine';
-            osc1.start();
-            gain1.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.8);
-            osc1.stop(audioContext.currentTime + 0.8);
-            break;
-        }
-        setTimeout(() => audioContext.close(), 1000);
-      } catch(e) { console.log("Audio not supported"); }
-    }
-
-    let activeQuestions = [];
-    let currentIdx = 0;
-    let score = 0;
-    let correctAnswers = 0;
+    let activeList = [];
+    let idx = 0;
+    let totalScore = 0;
+    let benarCount = 0;
     let lives = 15;
-    let canAnswer = true;
-    let isAnswered = false;
-    
-    // DOM elements
-    const mathQuestionEl = document.getElementById("mathQuestion");
-    const optionsGrid = document.getElementById("optionsGrid");
-    const feedbackDiv = document.getElementById("feedbackMsg");
-    const scoreSpan = document.getElementById("scoreDisplay");
-    const correctCountSpan = document.getElementById("correctCount");
-    const questionCounterSpan = document.getElementById("questionCounter");
-    const avgScoreSpan = document.getElementById("avgScore");
-    const livesContainer = document.getElementById("livesContainer");
-    const nextBtn = document.getElementById("nextButton");
-    const resetBtn = document.getElementById("resetButton");
-    const questionPanel = document.getElementById("questionPanel");
-    const modal = document.getElementById("resultModal");
-    const finalCorrectSpan = document.getElementById("finalCorrect");
-    const finalScoreSpan = document.getElementById("finalScore");
-    const finalAvgSpan = document.getElementById("finalAvg");
-    const gradeEmojiSpan = document.getElementById("gradeEmoji");
-    const motivationMsgSpan = document.getElementById("motivationMsg");
-    const closeModalBtn = document.getElementById("closeModalBtn");
+    let canPick = true;
+    let answered = false;
 
-    function shuffleArray(arr) {
+    const questionEl = document.getElementById("questionText");
+    const optionsDiv = document.getElementById("optionsArea");
+    const feedback = document.getElementById("feedbackMsg");
+    const scoreSpan = document.getElementById("scoreValue");
+    const correctSpan = document.getElementById("correctCount");
+    const qCounterSpan = document.getElementById("questionCounter");
+    const avgSpan = document.getElementById("avgScore");
+    const livesDiv = document.getElementById("livesContainer");
+    const nextButton = document.getElementById("nextBtn");
+    const resetButton = document.getElementById("resetBtn");
+    const quizCard = document.getElementById("quizCard");
+
+    // Modal elements
+    const modal = document.getElementById("certModal");
+    const finalCorrectSpan = document.getElementById("finalCorrect");
+    const finalTotalScoreSpan = document.getElementById("finalTotalScore");
+    const finalPercentSpan = document.getElementById("finalPercent");
+    const gradeIconSpan = document.getElementById("gradeIcon");
+    const motivationMsgSpan = document.getElementById("motivationMsg");
+    const certTitleSpan = document.getElementById("certTitle");
+    const certSubSpan = document.getElementById("certSub");
+    const modalRestart = document.getElementById("modalRestartBtn");
+
+    function shuffle(arr) {
       for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -576,239 +542,257 @@
     }
 
     function updateLivesUI() {
-      livesContainer.innerHTML = "";
+      livesDiv.innerHTML = "";
       for (let i = 0; i < lives; i++) {
-        const heart = document.createElement("span");
-        heart.className = "heart";
+        let heart = document.createElement("span");
+        heart.className = "heart-icon";
         heart.innerHTML = "❤️";
-        livesContainer.appendChild(heart);
+        livesDiv.appendChild(heart);
       }
       for (let i = 0; i < (15 - lives); i++) {
-        const lost = document.createElement("span");
-        lost.className = "heart";
+        let lost = document.createElement("span");
+        lost.className = "heart-icon";
         lost.innerHTML = "🖤";
         lost.style.opacity = "0.4";
-        livesContainer.appendChild(lost);
+        livesDiv.appendChild(lost);
       }
     }
 
-    function updateStatsUI() {
-      scoreSpan.innerText = score;
-      correctCountSpan.innerText = correctAnswers;
-      const currentNumber = (currentIdx + 1);
-      questionCounterSpan.innerText = `${currentNumber} / ${activeQuestions.length}`;
-      let avg = 0;
-      if (correctAnswers > 0) avg = Math.floor((score / correctAnswers) * 10) / 10;
-      avgScoreSpan.innerText = avg;
-      document.querySelectorAll(".stat-value").forEach(el => {
-        el.style.transform = "scale(1.03)";
-        setTimeout(() => { if(el) el.style.transform = "scale(1)"; }, 150);
+    function updateStats() {
+      scoreSpan.innerText = totalScore;
+      correctSpan.innerText = benarCount;
+      let currentNum = idx + 1;
+      qCounterSpan.innerText = `${currentNum} / ${activeList.length}`;
+      let rata = (benarCount > 0) ? Math.floor((totalScore / benarCount) * 10) / 10 : 0;
+      avgSpan.innerText = rata;
+    }
+
+    function disableOptions(disabled) {
+      document.querySelectorAll(".opt-btn").forEach(btn => {
+        if (disabled) btn.disabled = true;
+        else btn.disabled = false;
       });
     }
 
-    function animateHeartLoss() {
-      const hearts = document.querySelectorAll(".heart");
-      if (hearts.length > 0 && hearts[0].innerHTML === "❤️") {
-        hearts[0].classList.add("heart-beat");
-        setTimeout(() => hearts[0].classList.remove("heart-beat"), 300);
-      }
-    }
-
-    function applyAnswerEffects(isUserCorrect, correctValue, selectedBtn) {
-      const allOptions = document.querySelectorAll(".math-option");
-      
-      allOptions.forEach(btn => {
-        const btnValue = btn.innerText;
-        if (btnValue === correctValue) {
-          btn.classList.add("correct-highlight");
-          btn.classList.add("disabled-opt");
+    // Efek setelah menjawab
+    function applyAnswerEffects(isCorrect, correctAnswer, selectedBtn) {
+      let allBtns = document.querySelectorAll(".opt-btn");
+      allBtns.forEach(btn => {
+        if (btn.innerText === correctAnswer) {
+          btn.classList.add("correct-glow");
         } else {
-          btn.classList.add("wrong-fade");
-          btn.classList.add("disabled-opt");
+          btn.classList.add("wrong-dim");
         }
+        btn.classList.add("disabled-btn");
         btn.disabled = true;
       });
-      
-      if (!isUserCorrect && selectedBtn) {
-        selectedBtn.classList.add("wrong-fade");
+      if (!isCorrect && selectedBtn) selectedBtn.classList.add("wrong-dim");
+    }
+
+    function showCertificate() {
+      let maxScore = 300;
+      let percent = Math.round((totalScore / maxScore) * 100);
+      finalCorrectSpan.innerText = benarCount;
+      finalTotalScoreSpan.innerText = totalScore;
+      finalPercentSpan.innerText = percent;
+
+      let gradeMsg = "", msgClass = "", gradeEmoji = "", titleText = "";
+      if (percent >= 85) {
+        gradeMsg = "Cerdas sekali! Matematika mengalir dalam dirimu.";
+        msgClass = "good";
+        gradeEmoji = "🏅✨";
+        titleText = "Sertifikat Keahlian";
+      } else if (percent >= 70) {
+        gradeMsg = "Bagus! Terus asah kemampuanmu.";
+        msgClass = "good";
+        gradeEmoji = "📘⭐";
+        titleText = "Sertifikat Mahir";
+      } else if (percent >= 55) {
+        gradeMsg = "Cukup. Belajar lagi yuk!";
+        msgClass = "good";
+        gradeEmoji = "📖🌤️";
+        titleText = "Sertifikat Belajar";
+      } else if (percent >= 40) {
+        gradeMsg = "Jangan menyerah, latihan lebih giat!";
+        msgClass = "good";
+        gradeEmoji = "💪📚";
+        titleText = "Sertifikat Semangat";
+      } else {
+        // nilai di bawah 40% → pesan khusus
+        gradeMsg = "YOU STUPID BAKA! Nilai kamu sangat rendah. Harus belajar dari awal!";
+        msgClass = "bad";
+        gradeEmoji = "😠⚠️";
+        titleText = "Sertifikat Pembelajaran Ulang";
       }
+
+      motivationMsgSpan.innerText = gradeMsg;
+      motivationMsgSpan.className = `motivation-text ${msgClass}`;
+      gradeIconSpan.innerText = gradeEmoji;
+      certTitleSpan.innerText = titleText;
+      certSubSpan.innerText = `SkyMath — Skor akhir: ${percent}%`;
+      modal.classList.add("active");
     }
 
-    function showResultModal() {
-      finalCorrectSpan.innerText = correctAnswers;
-      finalScoreSpan.innerText = score;
-      let avg = 0;
-      if (correctAnswers > 0) avg = Math.floor((score / correctAnswers) * 10) / 10;
-      finalAvgSpan.innerText = avg;
-      const percentage = (correctAnswers / 30) * 100;
-      let gradeEmoji = "";
-      let message = "";
-      if (percentage >= 90) { gradeEmoji = "🏆🌟 Sempurna!"; message = "Luar biasa! Kamu benar-benar jago matematika!"; }
-      else if (percentage >= 75) { gradeEmoji = "🎉✨ Hebat!"; message = "Bagus sekali! Nilai kamu sangat memuaskan!"; }
-      else if (percentage >= 60) { gradeEmoji = "👍📚 Cukup Baik!"; message = "Kerja bagus! Pelajari lagi soal yang salah ya!"; }
-      else if (percentage >= 40) { gradeEmoji = "💪📖 Semangat!"; message = "Jangan menyerah! Coba lagi, kamu pasti bisa!"; }
-      else { gradeEmoji = "🌱✨ Terus Belajar!"; message = "Tetap semangat! Setiap kesalahan adalah pelajaran."; }
-      gradeEmojiSpan.innerText = gradeEmoji;
-      motivationMsgSpan.innerText = message;
-      modal.classList.add("show");
-      playSound('win');
+    function closeModalAndReset() {
+      modal.classList.remove("active");
+      resetGame();
     }
 
-    function hideModal() { modal.classList.remove("show"); resetGame(); }
-
-    function gameOver() {
-      canAnswer = false;
-      isAnswered = true;
-      setOptionsEnabled(false);
-      feedbackDiv.innerHTML = "💀 Permainan selesai. Tekan 'Mulai Ulang' untuk bermain lagi. 💀";
-      nextBtn.disabled = true;
-      nextBtn.classList.add("btn-disabled");
-      playSound('gameover');
+    function gameEnd(isWin) {
+      canPick = false;
+      answered = true;
+      disableOptions(true);
+      nextButton.disabled = true;
+      nextButton.classList.add("btn-disabled");
+      showCertificate();
     }
 
-    function winGame() {
-      canAnswer = false;
-      isAnswered = true;
-      setOptionsEnabled(false);
-      nextBtn.disabled = true;
-      nextBtn.classList.add("btn-disabled");
-      showResultModal();
-    }
-
-    function goToNextQuestion() {
-      if (!isAnswered) {
-        feedbackDiv.innerHTML = "Jawab soal terlebih dahulu sebelum melanjutkan.";
-        feedbackDiv.style.background = "#fff3e0dd";
+    function nextQuestion() {
+      if (!answered) {
+        feedback.innerText = "Jawab dulu soalnya!";
+        feedback.style.background = "#fff0cfdd";
         setTimeout(() => {
-          if (feedbackDiv.innerHTML.includes("Jawab soal")) 
-            feedbackDiv.innerHTML = "Pilih jawaban yang tepat untuk melanjutkan.";
-          feedbackDiv.style.background = "rgba(245, 250, 255, 0.85)";
-        }, 1400);
+          if (feedback.innerText.includes("Jawab dulu")) feedback.innerText = "Pilih jawaban yang tepat";
+          feedback.style.background = "rgba(245, 250, 255, 0.8)";
+        }, 1000);
         return;
       }
       if (lives <= 0) return;
-      if (currentIdx + 1 < activeQuestions.length) {
-        currentIdx++;
-        isAnswered = false;
-        canAnswer = true;
+      if (idx + 1 < activeList.length) {
+        idx++;
+        answered = false;
+        canPick = true;
         loadCurrentQuestion();
-        nextBtn.disabled = true;
-        nextBtn.classList.add("btn-disabled");
+        nextButton.disabled = true;
+        nextButton.classList.add("btn-disabled");
       } else {
-        if (lives > 0) winGame();
-        else gameOver();
+        if (lives > 0) gameEnd(true);
+        else gameEnd(false);
       }
     }
 
-    function setOptionsEnabled(enabled) {
-      document.querySelectorAll(".math-option").forEach(btn => {
-        if (enabled) btn.disabled = false;
-        else btn.disabled = true;
-      });
-    }
-
-    function handleAnswer(selectedValue, btnElement) {
-      if (!canAnswer) return;
+    function handleAnswer(selected, btn) {
+      if (!canPick) return;
+      if (answered) return;
       if (lives <= 0) return;
-      if (isAnswered) return;
-      
-      const currentSoal = activeQuestions[currentIdx];
-      const isCorrect = (selectedValue === currentSoal.correct);
-      
-      applyAnswerEffects(isCorrect, currentSoal.correct, btnElement);
-      
+
+      const current = activeList[idx];
+      const isCorrect = (selected === current.benar);
+      applyAnswerEffects(isCorrect, current.benar, btn);
+
       if (isCorrect) {
-        score += 10;
-        correctAnswers++;
-        updateStatsUI();
-        feedbackDiv.innerHTML = "✓ Jawaban benar! +10 poin. Tekan 'Soal Berikutnya' untuk lanjut.";
-        feedbackDiv.style.background = "#e4f5e9dd";
-        questionPanel.classList.add("panel-pop");
-        setTimeout(() => questionPanel.classList.remove("panel-pop"), 250);
-        playSound('correct');
+        totalScore += 10;
+        benarCount++;
+        updateStats();
+        feedback.innerText = "✔ Benar! +10 poin. Lanjutkan ke soal berikutnya.";
+        feedback.style.background = "#e4f5e9dd";
+        quizCard.classList.add("panel-pop");
+        setTimeout(() => quizCard.classList.remove("panel-pop"), 200);
+        playBeep(true);
       } else {
         lives--;
         updateLivesUI();
-        animateHeartLoss();
-        feedbackDiv.innerHTML = `✗ Jawaban salah. Jawaban yang benar: ${currentSoal.correct}. Sisa nyawa: ${lives}`;
-        feedbackDiv.style.background = "#ffe6e6dd";
-        playSound('wrong');
+        feedback.innerText = `✗ Salah! Jawaban: ${current.benar}. Sisa nyawa: ${lives}`;
+        feedback.style.background = "#ffe6e6dd";
+        playBeep(false);
         if (lives <= 0) {
-          canAnswer = false;
-          isAnswered = true;
-          gameOver();
+          canPick = false;
+          answered = true;
+          gameEnd(false);
           return;
         }
+        // animasi heartbeat di nyawa
+        let hearts = document.querySelectorAll(".heart-icon");
+        if (hearts[0] && hearts[0].innerHTML === "❤️") hearts[0].classList.add("heart-beat");
+        setTimeout(() => { if(hearts[0]) hearts[0].classList.remove("heart-beat"); }, 300);
       }
-      
-      canAnswer = false;
-      isAnswered = true;
-      nextBtn.disabled = false;
-      nextBtn.classList.remove("btn-disabled");
-      updateStatsUI();
+
+      canPick = false;
+      answered = true;
+      nextButton.disabled = false;
+      nextButton.classList.remove("btn-disabled");
+      updateStats();
+    }
+
+    // suara sederhana (opsional, tidak mengganggu)
+    function playBeep(correct) {
+      try {
+        let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "sine";
+        osc.frequency.value = correct ? 880 : 440;
+        gain.gain.value = 0.2;
+        osc.start();
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+        osc.stop(audioCtx.currentTime + 0.4);
+        setTimeout(() => audioCtx.close(), 500);
+      } catch(e) {}
     }
 
     function loadCurrentQuestion() {
-      if (!activeQuestions.length || currentIdx >= activeQuestions.length) {
-        if (lives > 0) winGame();
-        else gameOver();
+      if (!activeList.length || idx >= activeList.length) {
+        gameEnd(true);
         return;
       }
-      const soal = activeQuestions[currentIdx];
+      let q = activeList[idx];
+      questionEl.style.opacity = "0.6";
+      setTimeout(() => { questionEl.innerText = q.soal; questionEl.style.opacity = "1"; }, 40);
       
-      mathQuestionEl.style.opacity = "0.6";
-      setTimeout(() => {
-        mathQuestionEl.innerText = soal.question;
-        mathQuestionEl.style.opacity = "1";
-      }, 50);
-      questionPanel.style.transform = "scale(0.98)";
-      setTimeout(() => { if(questionPanel) questionPanel.style.transform = "scale(1)"; }, 120);
-      
-      const shuffledOptions = shuffleArray([...soal.options]);
-      optionsGrid.innerHTML = "";
-      shuffledOptions.forEach(opt => {
-        const btn = document.createElement("button");
-        btn.className = "math-option";
+      let shuffledOpt = shuffle([...q.opt]);
+      optionsDiv.innerHTML = "";
+      shuffledOpt.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.className = "opt-btn";
         btn.innerText = opt;
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
-          if (canAnswer && !isAnswered && lives > 0) handleAnswer(opt, btn);
+          if (canPick && !answered && lives > 0) handleAnswer(opt, btn);
+          else if (answered) {
+            feedback.innerText = "Kamu sudah menjawab, klik 'Soal berikutnya'.";
+            feedback.style.background = "#fff0cfdd";
+            setTimeout(() => {
+              if (feedback.innerText.includes("sudah menjawab")) feedback.innerText = "Pilih jawaban yang tepat";
+              feedback.style.background = "rgba(245, 250, 255, 0.8)";
+            }, 1100);
+          }
         });
-        optionsGrid.appendChild(btn);
+        optionsDiv.appendChild(btn);
       });
-      
-      canAnswer = true;
-      isAnswered = false;
-      nextBtn.disabled = true;
-      nextBtn.classList.add("btn-disabled");
-      feedbackDiv.innerHTML = "Pilih salah satu jawaban di atas.";
-      feedbackDiv.style.background = "rgba(245, 250, 255, 0.85)";
-      updateStatsUI();
+
+      canPick = true;
+      answered = false;
+      nextButton.disabled = true;
+      nextButton.classList.add("btn-disabled");
+      feedback.innerText = "Klik salah satu jawaban di atas.";
+      feedback.style.background = "rgba(245, 250, 255, 0.8)";
+      updateStats();
     }
 
     function resetGame() {
-      activeQuestions = shuffleArray([...bankSoal]);
-      currentIdx = 0;
-      score = 0;
-      correctAnswers = 0;
+      activeList = shuffle([...soalBank]);
+      idx = 0;
+      totalScore = 0;
+      benarCount = 0;
       lives = 15;
-      canAnswer = true;
-      isAnswered = false;
-      updateStatsUI();
+      canPick = true;
+      answered = false;
+      updateStats();
       updateLivesUI();
       loadCurrentQuestion();
-      nextBtn.disabled = true;
-      nextBtn.classList.add("btn-disabled");
-      feedbackDiv.innerHTML = "Permainan dimulai. Pilih jawaban, lalu tekan 'Soal Berikutnya'.";
-      feedbackDiv.style.background = "rgba(245, 250, 255, 0.85)";
+      nextButton.disabled = true;
+      nextButton.classList.add("btn-disabled");
+      feedback.innerText = "Permainan baru! Pilih jawaban lalu tekan 'Soal berikutnya'.";
       document.querySelector(".game-container").style.transform = "scale(0.99)";
-      setTimeout(() => { if(document.querySelector(".game-container")) document.querySelector(".game-container").style.transform = "scale(1)"; }, 160);
+      setTimeout(() => { if(document.querySelector(".game-container")) document.querySelector(".game-container").style.transform = "scale(1)"; }, 140);
     }
-    
-    nextBtn.addEventListener("click", goToNextQuestion);
-    resetBtn.addEventListener("click", resetGame);
-    closeModalBtn.addEventListener("click", hideModal);
-    
+
+    nextButton.addEventListener("click", nextQuestion);
+    resetButton.addEventListener("click", resetGame);
+    modalRestart.addEventListener("click", closeModalAndReset);
+
     resetGame();
   })();
 </script>
